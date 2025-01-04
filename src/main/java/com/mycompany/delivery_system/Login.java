@@ -113,6 +113,10 @@ public class Login extends javax.swing.JFrame {
 
         String user=txtuname.getText();
         String password=txtpass.getText();
+        
+        Home dt=new  Home();
+          dt.setVisible(true);
+          this.hide();
        
     }//GEN-LAST:event_btnloginActionPerformed
 
