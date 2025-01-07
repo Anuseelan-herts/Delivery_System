@@ -4,15 +4,15 @@
  */
 package com.mycompany.delivery_system;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Asus
  */
 public class Login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Login
-     */
+   String lname="Anu",lpass="1998";
     public Login() {
         initComponents();
     }
@@ -74,7 +74,7 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(chbshow);
-        chbshow.setBounds(250, 240, 97, 21);
+        chbshow.setBounds(250, 240, 140, 21);
 
         btnlogin.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         btnlogin.setText("LOGIN");
@@ -90,11 +90,11 @@ public class Login extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 863, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
         );
 
         pack();
@@ -113,11 +113,14 @@ public class Login extends javax.swing.JFrame {
 
         String user=txtuname.getText();
         String password=txtpass.getText();
-        
-        Home dt=new  Home();
-          dt.setVisible(true);
-          this.hide();
-       
+        if(lname.equalsIgnoreCase(user) && lpass.equalsIgnoreCase(password)){
+      Home h = new Home();
+                h.setVisible(true);
+                dispose();
+        }
+        else{
+        JOptionPane.showMessageDialog(rootPane, "Incorrect Username or Password !!!!");
+        }
     }//GEN-LAST:event_btnloginActionPerformed
 
     /**
