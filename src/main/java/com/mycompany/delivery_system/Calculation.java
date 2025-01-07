@@ -29,15 +29,19 @@ public class Calculation extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtpid = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtweight = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtwidth = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        txtheight = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtlength = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        jcusid = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,9 +60,9 @@ public class Calculation extends javax.swing.JFrame {
         jPanel1.add(jLabel2);
         jLabel2.setBounds(110, 80, 80, 20);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(jTextField1);
-        jTextField1.setBounds(210, 80, 140, 20);
+        txtpid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txtpid);
+        txtpid.setBounds(210, 80, 140, 20);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -66,9 +70,9 @@ public class Calculation extends javax.swing.JFrame {
         jPanel1.add(jLabel3);
         jLabel3.setBounds(130, 100, 70, 30);
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(jTextField2);
-        jTextField2.setBounds(210, 110, 140, 20);
+        txtweight.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txtweight);
+        txtweight.setBounds(210, 110, 140, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
@@ -76,9 +80,9 @@ public class Calculation extends javax.swing.JFrame {
         jPanel1.add(jLabel4);
         jLabel4.setBounds(130, 170, 70, 20);
 
-        jTextField3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(jTextField3);
-        jTextField3.setBounds(210, 170, 140, 20);
+        txtwidth.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txtwidth);
+        txtwidth.setBounds(210, 170, 140, 20);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -86,9 +90,9 @@ public class Calculation extends javax.swing.JFrame {
         jPanel1.add(jLabel5);
         jLabel5.setBounds(130, 140, 70, 20);
 
-        jTextField4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jPanel1.add(jTextField4);
-        jTextField4.setBounds(210, 140, 140, 20);
+        txtheight.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txtheight);
+        txtheight.setBounds(210, 140, 140, 20);
 
         jButton1.setBackground(new java.awt.Color(0, 102, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -99,7 +103,7 @@ public class Calculation extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton1);
-        jButton1.setBounds(210, 210, 140, 30);
+        jButton1.setBounds(210, 250, 140, 30);
 
         jButton2.setText("Main Menu");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -109,6 +113,28 @@ public class Calculation extends javax.swing.JFrame {
         });
         jPanel1.add(jButton2);
         jButton2.setBounds(20, 400, 140, 30);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Length :");
+        jPanel1.add(jLabel6);
+        jLabel6.setBounds(130, 200, 70, 20);
+
+        txtlength.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jPanel1.add(txtlength);
+        txtlength.setBounds(210, 200, 140, 20);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("Customer ID :");
+        jPanel1.add(jLabel7);
+        jLabel7.setBounds(20, 20, 110, 20);
+
+        jcusid.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jcusid.setForeground(new java.awt.Color(255, 255, 255));
+        jcusid.setText("001");
+        jPanel1.add(jcusid);
+        jcusid.setBounds(140, 20, 70, 20);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -130,6 +156,8 @@ public class Calculation extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        Parcel pal=new Parcel(txtpid.getText(),Double.valueOf(txtweight.getText()),Double.valueOf(txtheight.getText()),Double.valueOf(txtwidth.getText()),Double.valueOf(txtlength.getText()),jcusid.getText());
+        pal.saveParcelToFile(pal);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -182,10 +210,14 @@ public class Calculation extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jcusid;
+    private javax.swing.JTextField txtheight;
+    private javax.swing.JTextField txtlength;
+    private javax.swing.JTextField txtpid;
+    private javax.swing.JTextField txtweight;
+    private javax.swing.JTextField txtwidth;
     // End of variables declaration//GEN-END:variables
 }
