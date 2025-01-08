@@ -1,0 +1,7 @@
+CustomerID,Name,Email,PhoneNumber,Address
+C001,John Doe,johndoe@example.com,123-456-7890,1234 Elm Street, Springfield, IL
+C002,Jane Smith,janesmith@example.com,234-567-8901,5678 Oak Avenue, Shelbyville, IL
+C003,Michael Johnson,michaelj@example.com,345-678-9012,91011 Pine Road, Decatur, IL
+C004,Emily Davis,emilydavis@example.com,456-789-0123,1213 Maple Lane, Peoria, IL
+C005,David Clark,davidclark@example.com,567-890-1234,1415 Birch Street, Urbana, IL
+C006,Susan Taylor,susantaylor@example.com,678-901-2345,1617 Cedar Avenue, Champaign, IL

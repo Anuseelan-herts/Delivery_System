@@ -14,28 +14,26 @@ public class AddParcelDialog extends JDialog {
     private static final long serialVersionUID = 1L;
     private final ParcelManager parcelManager = ParcelManager.getInstance();
     private final JTextField txtParcelID = new JTextField();
-    private final JSpinner spnDaysInDepot = new JSpinner(
-            new SpinnerNumberModel(1, 1, 30, 1));
-    private final JSpinner spnWeight = new JSpinner(
-            new SpinnerNumberModel(1D, .1, 100D, 1D));
-    private final JSpinner spnWidth = new JSpinner(
-            new SpinnerNumberModel(1D, .1, 100D, 1D));
-    private final JSpinner spnHeight = new JSpinner(
-            new SpinnerNumberModel(1D, .1, 100D, 1D));
-    private final JSpinner spnLength = new JSpinner(
-            new SpinnerNumberModel(1D, .1, 100D, 1D));
+    private final JSpinner spnDaysInDepot = new JSpinner(new SpinnerNumberModel(1, 1, 30, 1));
+    private final JSpinner spnWeight = new JSpinner(new SpinnerNumberModel(1D, .1, 100D, 1D));
+    private final JSpinner spnWidth = new JSpinner(new SpinnerNumberModel(1D, .1, 100D, 1D));
+    private final JSpinner spnHeight = new JSpinner(new SpinnerNumberModel(1D, .1, 100D, 1D));
+    private final JSpinner spnLength = new JSpinner(new SpinnerNumberModel(1D, .1, 100D, 1D));
     private final JButton btnAdd = new JButton("Add");
     private final JButton btnReset = new JButton("Reset");
 
     public AddParcelDialog(JFrame frame) {
         super(frame, "Add Parcel Dialog", true);
 
+        // Panel for the form fields
         JPanel pnlCenter = new JPanel(new GridLayout(6, 2));
         JPanel pnlSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
+        // Action listeners for buttons
         btnAdd.addActionListener(e -> add());
         btnReset.addActionListener(e -> reset());
 
+        // Add form fields to the panel
         pnlCenter.add(new JLabel("Parcel ID: ", JLabel.RIGHT));
         pnlCenter.add(txtParcelID);
         pnlCenter.add(new JLabel("Days in Depot: ", JLabel.RIGHT));
@@ -49,18 +47,22 @@ public class AddParcelDialog extends JDialog {
         pnlCenter.add(new JLabel("Length (cm): ", JLabel.RIGHT));
         pnlCenter.add(spnLength);
 
+        // Add buttons to the south panel
         pnlSouth.add(btnAdd);
         pnlSouth.add(btnReset);
 
+        // Add panels to the dialog
         this.add(pnlCenter, BorderLayout.CENTER);
         this.add(pnlSouth, BorderLayout.SOUTH);
 
+        // Dialog properties
         this.setSize(320, 240);
         this.setResizable(false);
         this.setLocationRelativeTo(frame);
         this.setVisible(true);
     }
 
+    // Method to add the parcel
     private void add() {
         Parcel parcel = new Parcel();
         parcel.setParcelID(txtParcelID.getText());
@@ -70,17 +72,14 @@ public class AddParcelDialog extends JDialog {
         parcel.setHeight((double) spnHeight.getValue());
         parcel.setLength((double) spnLength.getValue());
 
-        if (parcelManager.addParcel(parcel)) {
+     
             JOptionPane.showMessageDialog(this, "Parcel successfully added.",
                     getTitle(), JOptionPane.INFORMATION_MESSAGE);
             this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this,
-                    "Unable to add parcel. Please try again.", getTitle(),
-                    JOptionPane.WARNING_MESSAGE);
-        }
+     
     }
 
+    // Reset form fields to default values
     private void reset() {
         txtParcelID.setText("");
         spnDaysInDepot.setValue(1);

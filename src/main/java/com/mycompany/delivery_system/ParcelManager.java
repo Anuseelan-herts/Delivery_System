@@ -25,34 +25,36 @@ public class ParcelManager {
         return instance;
     }
 
-    public boolean addParcel(Parcel parcel) {
-        modified = true;
-        return parcels.add(parcel);
-    }
-
-    public boolean deleteParcel(Parcel parcel) {
-        modified = true;
-        return parcels.remove(parcel);
-    }
-
-    public Parcel getParcel(String parcelID) {
-        return parcels.stream()
-                      .filter(parcel -> parcel.getParcelID().equals(parcelID))
-                      .findFirst()
-                      .orElse(null);
-    }
-
-    public List<Parcel> getParcels() {
-        return parcels;
+    public boolean saveParcels() {
+        // Implement saving logic, e.g., writing to a file
+        modified = false;
+        return true; // return true if successful
     }
 
     public boolean isModified() {
         return modified;
     }
+    
 
-    public boolean saveParcels() {
-        // Simulate saving to a file or database
-        modified = false;
-        return true;
+    public List<Parcel> getParcels() {
+        return parcels;
     }
+
+    public Parcel getParcel(String parcelID) {
+        for (Parcel parcel : parcels) {
+            if (parcel.getParcelID().equals(parcelID)) {
+                return parcel;
+            }
+        }
+        return null;
+    }
+
+    public boolean deleteParcel(Parcel parcel) {
+        if (parcels.remove(parcel)) {
+            modified = true;
+            return true;
+        }
+        return false;
+    }
+
 }

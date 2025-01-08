@@ -6,6 +6,11 @@ package com.mycompany.delivery_system;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.DefaultListSelectionModel;
 import javax.swing.JButton;
@@ -29,41 +34,14 @@ public class ParcelListFrame extends JFrame
 	private final JButton btnAdd = new JButton("Add Parcel"),
 			btnMark = new JButton("Mark as Collected"),
 			btnSave = new JButton("Save Report");
+         List<Parcel> parcels;
 
 	public ParcelListFrame() throws Exception
 	{
 		super("Parcel List - Depot Management System");
 
 		JPanel pnlSouth = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-
-		// XXX: 1st Option: JFrame as listener
-		// btnAdd.addActionListener(this);
-		// btnMark.addActionListener(this);
-
-		// XXX: 2nd Option: Named inner class as listener
-		// btnAdd.addActionListener(new AddButtonListener());
-		// btnMark.addActionListener(new MarkButtonListener());
-
-		// XXX: 3rd Option: Anonymous inner class as listener
-		// btnAdd.addActionListener(new ActionListener()
-		// {
-		// @Override
-		// public void actionPerformed(ActionEvent e)
-		// {
-		// System.out.println("Add button clicked");
-		// }
-		// });
-		//
-		// btnMark.addActionListener(new ActionListener()
-		// {
-		// @Override
-		// public void actionPerformed(ActionEvent e)
-		// {
-		// System.out.println("Mark button clicked");
-		// }
-		// });
-
-		// XXX: 4th Option: Using lambda method
+                
 		btnAdd.addActionListener(e -> add());
 		btnMark.addActionListener(e -> mark());
 		btnSave.addActionListener(e -> save());
@@ -84,11 +62,14 @@ public class ParcelListFrame extends JFrame
 		this.setVisible(true);
 	}
 
-	private void add()
-	{
-		new AddParcelDialog(this);
-		display();
-	}
+	private void add() {
+    // This opens the AddParcelDialog to let the user input parcel details.
+    AddParcelDialog dialog = new AddParcelDialog(this);
+   
+        display();
+    
+}
+
 
 	private void mark()
 	{
@@ -138,49 +119,54 @@ public class ParcelListFrame extends JFrame
 		}
 	}
 
-	private void display()
-	{
-		btnSave.setEnabled(parcelManager.isModified());
-		tblParcel.setModel(new DefaultTableModel(
-				parcelManager.getParcels().stream().map(parcel -> new String[] {
-						parcel.getParcelID(),
-						parcel.getDaysInDepot() + " day(s)",
-						parcel.getWeight() + " kg(s)",
-						parcel.getWidth() + " cm(s) x " + parcel.getHeight()
-								+ " cm(s) x " + parcel.getLength() + " cm(s)"})
-						.toArray(String[][]::new),
-				new String[] {"Parcel ID", "Days in Depot", "Weight",
-						"Dimension"}));
-	}
+	private void display() {
+    // Read parcels from CSV
+    parcels = readParcelsFromCSV("C:/Users/Asus/Documents/NetBeansProjects/Delivery_System/Delivery_System/src/main/java/com/mycompany/delivery_system/Parcels.csv");
 
-	// XXX: 1st Option: JFrame as listener
-	// @Override
-	// public void actionPerformed(ActionEvent event)
-	// {
-	// if (event.getSource() == btnAdd)
-	// System.out.println("Add button clicked");
-	// else if (event.getSource() == btnMark)
-	// System.out.println("Mark button clicked");
-	// }
+    // Enable or disable save button based on whether any parcel is modified
+    btnSave.setEnabled(parcelManager.isModified());
 
-	// XXX: 2nd Option: Named inner class as listener
-	// private class AddButtonListener implements ActionListener
-	// {
-	// @Override
-	// public void actionPerformed(ActionEvent e)
-	// {
-	// System.out.println("Add button clicked");
-	// }
-	// }
-	//
-	// private class MarkButtonListener implements ActionListener
-	// {
-	// @Override
-	// public void actionPerformed(ActionEvent e)
-	// {
-	// System.out.println("Mark button clicked");
-	// }
-	// }
+    // Update the table model with data from the CSV
+    tblParcel.setModel(new DefaultTableModel(
+        parcels.stream().map(parcel -> new String[] {
+            parcel.getParcelID(),
+            parcel.getDaysInDepot() + " day(s)",
+            parcel.getWeight() + " kg(s)",
+            parcel.getWidth() + " cm(s) x " + parcel.getHeight() 
+            + " cm(s) x " + parcel.getLength() + " cm(s)"
+        }).toArray(String[][]::new),
+        new String[] {"Parcel ID", "Days in Depot", "Weight", "Dimension"}
+    ));
+}
+
+private List<Parcel> readParcelsFromCSV(String filePath) {
+    List<Parcel> parcels = new ArrayList<>();
+
+    try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        String line;
+        while ((line = br.readLine()) != null) {
+            String[] values = line.split(","); // Assuming CSV is comma-separated
+            if (values.length == 6) {
+                // Assuming CSV fields are: ParcelID, DaysInDepot, Weight, Width, Height, Length
+                String parcelID = values[0];
+                int daysInDepot = Integer.parseInt(values[1]);
+                double weight = Double.parseDouble(values[2]);
+                double width = Double.parseDouble(values[3]);
+                double height = Double.parseDouble(values[4]);
+                double length = Double.parseDouble(values[5]);
+
+                // Create a Parcel object and add to the list
+                Parcel parcel = new Parcel(parcelID, daysInDepot, weight, width, height, length);
+                parcels.add(parcel);
+            }
+        }
+    } 
+    catch (IOException e) {
+        e.printStackTrace();
+    }
+
+    return parcels;
+}
 
 	public static void main(String[] args) throws Exception
 	{
