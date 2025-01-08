@@ -18,7 +18,7 @@ public class Manager extends JFrame {
     private JButton processButton;
     private JLabel customerLabel;
     private JLabel parcelLabel;
-
+ParcelManager parcelManager;
     public Manager() {
         setTitle("Parcel Processing System");
         setSize(600, 400);
@@ -32,7 +32,7 @@ public class Manager extends JFrame {
 
         // Read customer and parcel data from CSV files
         FileReaderUtil.readCustomers("customer.csv", queueOfCustomers);
-        FileReaderUtil.readParcels("parcel.csv", parcelMap);
+        FileReaderUtil.readParcels("parcel.csv", parcelMap,parcelManager);
 
         // Set up the layout
         setLayout(new BorderLayout());

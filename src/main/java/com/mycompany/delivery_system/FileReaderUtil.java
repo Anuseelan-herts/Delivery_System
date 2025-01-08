@@ -1,12 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.mycompany.delivery_system;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+
+
 
 public class FileReaderUtil {
 
@@ -15,32 +13,54 @@ public class FileReaderUtil {
             String line;
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(",");
-                String name = parts[0].trim();
-                String id = parts[1].trim();
-                queue.addCustomer(new Customer(name, id));
+                if (parts.length >= 2) {
+                    String name = parts[0].trim();
+                    String id = parts[1].trim();
+                    queue.addCustomer(new Customer(name, id));
+                } else {
+                    System.err.println("Invalid customer data: " + line);
+                }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Error reading customer file: " + e.getMessage());
         }
     }
 
-    public static void readParcels(String parcelFilePath, ParcelMap parcelMap) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(parcelFilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] parts = line.split(",");
-                String customerId = parts[0].trim();
-                int daysInDepot = Integer.parseInt(parts[1].trim());
-                int weight = Integer.parseInt(parts[2].trim());
-                int width = Integer.parseInt(parts[3].trim());
-                int height = Integer.parseInt(parts[4].trim());
-                int length = Integer.parseInt(parts[5].trim());
 
-                Parcel parcel = new Parcel(customerId, daysInDepot, weight, width, height, length);
-                parcelMap.addParcel(customerId, parcel);
+public static void readParcels(String parcelFilePath, ParcelMap parcelMap, ParcelManager parcelManager) {
+    try (BufferedReader reader = new BufferedReader(new FileReader(parcelFilePath))) {
+        String line;
+
+        // Skip the header row
+        line = reader.readLine(); // Read and discard the first line (header)
+
+        while ((line = reader.readLine()) != null) {
+            String[] parts = line.split(",");
+            if (parts.length >= 8) { // Ensure all required fields are present
+                try {
+                    String parcelID = parts[0].trim();
+                    String customerID = parts[1].trim();
+                    int daysInDepot = Integer.parseInt(parts[2].trim());
+                    double weight = Double.parseDouble(parts[3].trim());
+                    double width = Double.parseDouble(parts[4].trim());
+                    double height = Double.parseDouble(parts[5].trim());
+                    double length = Double.parseDouble(parts[6].trim());
+                    double deliveryFee = Double.parseDouble(parts[7].trim());
+
+                    Parcel parcel = new Parcel(parcelID, customerID, daysInDepot, weight, width, height, length, deliveryFee);
+                    parcelMap.addParcel(parcelID, parcel);  // Adding to the ParcelMap
+                    parcelManager.addParcel(parcel);       // Adding to the existing ParcelManager
+                } catch (NumberFormatException e) {
+                    System.err.println("Invalid numeric value in parcel data: " + line);
+                }
+            } else {
+                System.err.println("Invalid parcel data: " + line);
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+    } catch (IOException e) {
+        System.err.println("Error reading parcel file: " + e.getMessage());
     }
+}
+
+
 }
